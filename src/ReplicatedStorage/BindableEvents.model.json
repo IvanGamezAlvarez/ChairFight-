@@ -1,0 +1,10 @@
+{
+  "ClassName": "Folder",
+  "Children": [
+    {
+      "Name": "ExampleBinable",
+      "ClassName": "BindableEvent"
+    }
+   
+  ]
+}

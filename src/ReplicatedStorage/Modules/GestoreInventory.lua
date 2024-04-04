@@ -29,6 +29,7 @@ end
 
 function GestoreInventory:SpawnTool(ChairName)
     self.ChairsTool = FolderOfResources:WaitForChild(ChairName):Clone()
+    self.ChairsTool.Parent = self.Player.Backpack
     self.ChairsTool.Parent = self.Player.Character
     return self
 end

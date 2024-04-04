@@ -3,7 +3,11 @@
   "Children": [
     {
       "Name": "ExampleRemote",
-      "ClassName": "BindableEvent"
+      "ClassName": "RemoteEvent"
+    },
+    {
+      "Name": "ChairEvent",
+      "ClassName": "RemoteEvent"
     }
   ]
 }

@@ -10,6 +10,9 @@ local CollectionService = game:GetService("CollectionService")
 local Players = game:GetService("Players")
 
 
+local RemoteEvents = ReplicatedStorage:FindFirstChild("RemoteEvents") or ReplicatedStorage:WaitForChild("RemoteEvents")
+local ChairEvent = RemoteEvents:WaitForChild("ChairEvent")
+
 
 
 -- Función para reproducir la animación
@@ -42,7 +45,11 @@ local function ActivateChairs()
     end
 end
 
-
+ChairEvent.OnServerEvent:Connect(function(player, tag, Value1, Value2)
+    if tag == "MakeDamage" then
+        Value1.Health = Value1.Health - Value2
+    end
+end)
 
 ActivateChairs()
 

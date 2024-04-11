@@ -20,6 +20,7 @@ function ViewportAvatarmodule.new(Parent, ObjectName, CreateViewport)
     else
         self.viewport = Parent
     end
+    self.viewport.BackgroundColor3 = Color3.new(0.588235, 0.839215, 0.737254)
     self.WorldModel =  Instance.new("WorldModel", self.viewport)
     self.Object = SourceModels:WaitForChild(ObjectName):Clone()
     self.Object.Parent = self.WorldModel
@@ -28,6 +29,7 @@ function ViewportAvatarmodule.new(Parent, ObjectName, CreateViewport)
     return self
 end
 function ViewportAvatarmodule:UpdateModel(newObject)
+    self.Object:Destroy()
     self.Object = SourceModels:WaitForChild(newObject):Clone()
     self.Object.Parent = self.WorldModel
     self:SetCamera(self.Object)

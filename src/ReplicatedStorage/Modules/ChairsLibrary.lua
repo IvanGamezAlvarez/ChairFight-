@@ -3,28 +3,17 @@ local ChairsLibrary =
     ClassicChair = 
     {
         Name = "Classic Chair",
-        Damage = " 10",
+        Damage = " 50",
         Health = " 100",
         Speed = "18",
         Multiply = "1",
         ID = "0",
         ImageId = "0",
         SpeedAttack = "3",
-        SpawnTime = "10"
+        SpawnTime = "10",
+        Cost = "1"
 
 
-    },
-    WheelChair = 
-    {
-        Name = "Wheel Chair",
-        Damage = " 20",
-        Health = " 200",
-        Speed = "32",
-        Multiply = "10",
-        ID = "0",
-        ImageId = "0",
-        SpeedAttack = "1",
-        SpawnTime = "20"
     },
     BarChair = 
     {
@@ -36,7 +25,21 @@ local ChairsLibrary =
         ID = "0",
         ImageId = "0",
         SpeedAttack = "3",
-        SpawnTime = "10"
+        SpawnTime = "10",
+        Cost = "3"
+    }, 
+    WheelChair = 
+    {
+        Name = "Wheel Chair",
+        Damage = " 20",
+        Health = " 200",
+        Speed = "32",
+        Multiply = "10",
+        ID = "0",
+        ImageId = "0",
+        SpeedAttack = "1",
+        SpawnTime = "20",
+        Cost = "5"
     },
 
 

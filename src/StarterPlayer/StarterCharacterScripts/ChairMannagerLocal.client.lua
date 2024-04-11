@@ -85,6 +85,18 @@ local function MakeConnection()
                     ChairEvent:FireServer(tag, ExternalHumanoid, Damage)
                     CanMakeDamage = false
                 end
+            else
+                
+                if part.Parent.Name == "Skeleton" then
+                    if CanMakeDamage then
+                        print("we found the alien mf")
+                        local Alien = part.Parent
+                        local ExternalHumanoid = Alien:WaitForChild("Humanoid")
+                        local tag = "MakeDamage"
+                        ChairEvent:FireServer(tag, ExternalHumanoid, Damage)
+                        CanMakeDamage = false    
+                    end
+                end
             end
         
     end)

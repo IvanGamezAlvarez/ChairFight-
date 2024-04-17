@@ -24,6 +24,7 @@ local Tool
 
 local SpeedAttack
 local Damage
+local KillsMultiple
 local CanHit = true
 local CanMakeDamage = false
 local hitTruck
@@ -56,6 +57,7 @@ local function SetStats(Chair)
             Humanoid.WalkSpeed = value["Speed"]
             SpeedAttack = value["SpeedAttack"]
             Damage = value["Damage"]
+            KillsMultiple = value["Multiply"]
         end
     end
 end
@@ -82,7 +84,7 @@ local function MakeConnection()
                 if CanMakeDamage then
                     local ExternalHumanoid = player.Character:WaitForChild("Humanoid")
                     local tag = "MakeDamage"
-                    ChairEvent:FireServer(tag, ExternalHumanoid, Damage)
+                    ChairEvent:FireServer(tag, ExternalHumanoid, Damage, KillsMultiple)
                     CanMakeDamage = false
                 end
             else
@@ -93,7 +95,7 @@ local function MakeConnection()
                         local Alien = part.Parent
                         local ExternalHumanoid = Alien:WaitForChild("Humanoid")
                         local tag = "MakeDamage"
-                        ChairEvent:FireServer(tag, ExternalHumanoid, Damage)
+                        ChairEvent:FireServer(tag, ExternalHumanoid, Damage, KillsMultiple)
                         CanMakeDamage = false    
                     end
                 end

@@ -12,6 +12,7 @@ GestoreInventory.__index = GestoreInventory
 
 function GestoreInventory.new(InventoryFrame, Player)
     local self = setmetatable({}, GestoreInventory)
+    self.EquipButton = InventoryFrame.EquipButton
     self.Player = Player
     self.SpecsFrame = InventoryFrame.Specs
     self.SpecImage = self.SpecsFrame:WaitForChild("SpecImage")
@@ -24,6 +25,7 @@ function GestoreInventory.new(InventoryFrame, Player)
     self.ScrollFrame = InventoryFrame.ScrollingFrame
     self.ChairsLibrary = ChairsLibrary
     self.ViewportClassSpecImage = ViewportMaker.new(self.SpecImage, "Classic Chair", false)
+    self.CanEquip = false
     return self
 end
 
@@ -31,6 +33,22 @@ function GestoreInventory:SpawnTool(ChairName)
     self.ChairsTool = FolderOfResources:WaitForChild(ChairName):Clone()
     self.ChairsTool.Parent = self.Player.Backpack
     self.ChairsTool.Parent = self.Player.Character
+    return self
+end
+
+function GestoreInventory:Unlock(Button)
+    Button:Destroy()
+
+
+end
+
+function GestoreInventory:UnlockButton()
+    if self.LastChairToUnlock == nil then
+        return
+    end
+
+    self.LastChairToUnlock:Destroy()
+    self.LastChairToUnlock = nil
     return self
 end
 
@@ -54,9 +72,16 @@ function GestoreInventory:LockButton(Button, value)
     BuyText.TextScaled = true
     BuyText.Name = "BuyText"
     BuyText.Font = "FredokaOne"
-    BuyText.Text = value["Cost"] .. " Wins"
+    BuyText.Text = value["Cost"] .. " Kills"
     BuyText.TextColor3 = Color3.new(1, 1, 1)
 
+    lockImage.Activated:Connect(function()
+        self.LastChairName = value["Name"]
+        self.LastPrice = value["Cost"]
+        self.EquipButton.Text = "Unlock"
+        self.LastChairToUnlock = lockImage
+        self.CanEquip = false
+    end)
 
     return self
 end
@@ -67,6 +92,13 @@ function GestoreInventory:SpawnChairsButtons()
         Button:SetTouchable()
         self:LockButton(Button.ClassButton.button, value)
         Button.ClassButton.button.Activated:Connect(function()
+            if self.LastUiStroke then
+                self.LastUiStroke.Thickness = 0
+            end
+                        self.LastUiStroke = Button.UIStroke
+            Button.UIStroke.Thickness = 3
+            self.EquipButton.Text = "Equip"
+            self.CanEquip = true
             self.ViewportClassSpecImage:UpdateModel(value["Name"])
             self.SpecName.Text = value["Name"]
             self.SpecDamage.Text = "Damage:  " .. value["Damage"]

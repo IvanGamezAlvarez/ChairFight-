@@ -45,9 +45,15 @@ local function ActivateChairs()
     end
 end
 
-ChairEvent.OnServerEvent:Connect(function(player, tag, Value1, Value2)
+ChairEvent.OnServerEvent:Connect(function(player, tag, Value1, Value2, Value3)
     if tag == "MakeDamage" then
         Value1.Health = Value1.Health - Value2
+        if Value1.Health <= 0 then
+            print(Value1.Parent.Name .. "Was Killed by" ..player.Name)
+            local leaderstats = player:WaitForChild("leaderstats")
+            local KillsData = leaderstats:WaitForChild("Kills")
+            KillsData.Value += 1 * Value3
+        end 
     end
 end)
 

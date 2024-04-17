@@ -21,7 +21,7 @@ local ChairsLibrary =
         Damage = "5",
         Health = " 100",
         Speed = "32",
-        Multiply = "10",
+        Multiply = "1",
         ID = "0",
         ImageId = "0",
         SpeedAttack = "3",
@@ -34,11 +34,24 @@ local ChairsLibrary =
         Damage = " 20",
         Health = " 200",
         Speed = "32",
-        Multiply = "10",
+        Multiply = "1",
         ID = "0",
         ImageId = "0",
         SpeedAttack = "1",
         SpawnTime = "20",
+        Cost = "5"
+    },
+    ParkBench = 
+    {
+        Name = "Park Bench",
+        Damage = " 30",
+        Health = " 150",
+        Speed = "10",
+        Multiply = "1",
+        ID = "0",
+        ImageId = "0",
+        SpeedAttack = "1",
+        SpawnTime = "45",
         Cost = "5"
     },
 

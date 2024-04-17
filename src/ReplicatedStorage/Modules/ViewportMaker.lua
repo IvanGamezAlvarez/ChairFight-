@@ -20,6 +20,7 @@ function ViewportAvatarmodule.new(Parent, ObjectName, CreateViewport)
     else
         self.viewport = Parent
     end
+    self.viewport.Name = ObjectName
     self.viewport.BackgroundColor3 = Color3.new(0.588235, 0.839215, 0.737254)
     self.WorldModel =  Instance.new("WorldModel", self.viewport)
     self.Object = SourceModels:WaitForChild(ObjectName):Clone()
@@ -38,6 +39,9 @@ end
 function ViewportAvatarmodule:SetTouchable ()
     self.ClassButton = ButtonMaker.new(self.viewport)
     self.ClassButton:FullSize()
+    self.UIStroke = Instance.new("UIStroke", self.ClassButton.button)
+    self.UIStroke.Color = Color3.new(0, 0, 1)
+    self.UIStroke.Thickness = 0
     return self
 end
 

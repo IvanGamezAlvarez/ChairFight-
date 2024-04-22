@@ -1,6 +1,9 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local DataStoreService = game:GetService("DataStoreService")
 local KillsData = DataStoreService:GetDataStore("KillsData")
+local LevelData = DataStoreService:GetDataStore("LevelData")
+local ExpieriencesData = DataStoreService:GetDataStore("ExpieriencesData")
+
 local PlayerDataStoreDonations = DataStoreService:GetDataStore("PlayerDataStoreDonations")
 local ChairsData = DataStoreService:GetDataStore("Chairs")
 
@@ -37,12 +40,21 @@ end
 game.Players.PlayerAdded:Connect(function(player)
 	local leaderstats = Instance.new("Folder", player)
 	leaderstats.Name = "leaderstats"
-	local prodoctsStorage = Instance.new("Folder", player)
-	prodoctsStorage.Name = "prodoctsStorage"
+	local statData = Instance.new("Folder", player)
+	statData.Name = "StatsData"
 	local PlayerUserId = player.UserId
 	local Kills = Instance.new("IntValue", leaderstats)
 	Kills.Name = "Kills"
-	Kills.Value = KillsData:GetAsync(PlayerUserId)	
+	Kills.Value = KillsData:GetAsync(PlayerUserId)
+	local Level = Instance.new("IntValue", leaderstats)
+	Level.Name = "Level"
+	Level.Value = LevelData:GetAsync(PlayerUserId)
+	ChairEvent:FireClient(player,"LevelUp", Level.Value)
+	local Experience = Instance.new("IntValue", statData)
+	Experience.Name = "Experience"
+	Experience.Value = ExpieriencesData:GetAsync(PlayerUserId)		
+	ChairEvent:FireClient(player,"AddExpirience", Experience.Value )
+
 	-- local donation = Instance.new("IntValue", leaderstats)
 	-- donation.Name = "Donations"
 	-- donation.Value = PlayerDataStoreDonations:GetAsync(PlayerUserId)
@@ -52,6 +64,7 @@ end)
 game.Players.PlayerRemoving:Connect(function(player)
 	local PlayerUserId = player.UserId
 	KillsData:SetAsync(PlayerUserId, player.leaderstats.Kills.Value) 
+	LevelData:SetAsync(PlayerUserId, player.leaderstats.Level.Value)
 	--PlayerDataStoreDonations:SetAsync(PlayerUserId, player.leaderstats.Donations.Value) 
 end)
 

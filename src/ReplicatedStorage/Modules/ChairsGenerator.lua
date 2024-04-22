@@ -32,12 +32,14 @@ function ChairsModule.new(Chair)
     self.Chair = Chair
     for index, value in pairs(ChairsLibrary) do 
         if Chair.Name == value["Name"] then
+            self.Name = value["Name"]
             self.Health = value["Health"]
             self.Damage = value["Damage"]
             self.CoinsMultiplier = value["Multiply"]
             self.Speed = value["Speed"]
             self.SpawnTime = value["SpawnTime"]
             self.SpeedAttack = value["SpeedAttack"]
+            self.RequireLevel = value["RequireLevel"]
             self.BillboardGui = BillboardGui:Clone()
             self.BillboardGui.Parent = Chair
             self.ProximityPromptInstance = Instance.new("ProximityPrompt", Chair)
@@ -51,17 +53,20 @@ end
 
 function ChairsModule:SetBillboardGui()
     print("Setting Billboard")
+    print(self.Name)
     self.Frame = self.BillboardGui.Frame
     self.CoinsMultiplierTxt = self.Frame.CoinsMultiplier
     self.DamageTxt= self.Frame.Damage
     self.HealthTxt = self.Frame.Health
     self.SpeedTxt = self.Frame.Speed
     self.SpeedAttackTxt = self.Frame.SpeedAttack
+    self.RequireLevelTxt = self.Frame.RequireLevel
     self.CoinsMultiplierTxt.Text = "Multiplier:   " ..self.CoinsMultiplier
     self.DamageTxt.Text = "Damage:   " ..self.Damage
     self.HealthTxt.Text = "Health:   " ..self.Health
     self.SpeedTxt.Text = "Speed:   " ..self.Speed
     self.SpeedAttackTxt.Text = "Speed attack:   " ..self.SpeedAttack
+    self.RequireLevelTxt.Text =  "Requiere level:   " ..self.RequireLevel
 
     return self
 end

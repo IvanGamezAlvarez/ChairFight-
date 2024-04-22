@@ -67,7 +67,7 @@ function GestoreInventory:LockButton(Button, value)
     BuyText.Position =  UDim2.new(.5,0,.8,0)
     BuyText.BackgroundColor3 = Color3.new(1, 1, 1)
     BuyText.BackgroundTransparency = 1
-    BuyText.Parent = Button
+    BuyText.Parent = lockImage
     BuyText.Size = UDim2.new(.9,0,.5,0)
     BuyText.TextScaled = true
     BuyText.Name = "BuyText"

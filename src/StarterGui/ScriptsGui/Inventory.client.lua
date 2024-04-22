@@ -32,8 +32,9 @@ InventoryClass:SpawnChairsButtons()
 
 EquipButton.Activated:Connect(function()
     if InventoryClass.CanEquip then
-        ChairsGenerator.DestroyChairs(LocalPlayer)
-        InventoryClass:SpawnTool(InventoryClass.SpecName.Text)
+        ChairEvent:FireServer("EquipChair", InventoryClass.SpecName.Text)
+        --ChairsGenerator.DestroyChairs(LocalPlayer)
+        --InventoryClass:SpawnTool()
         InventoryFrame.Visible = false
     else
         print(KillsData.Value)

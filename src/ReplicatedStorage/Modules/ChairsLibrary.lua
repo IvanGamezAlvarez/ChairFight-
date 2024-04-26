@@ -12,8 +12,7 @@ local ChairsLibrary =
         SpeedAttack = "3",
         SpawnTime = "10",
         Cost = "1",
-        RequireLevel = "1"
-
+        RequireLevel = "1",
 
     },
     BarChair = 
@@ -28,7 +27,7 @@ local ChairsLibrary =
         SpeedAttack = "3",
         SpawnTime = "10",
         Cost = "3",
-        RequireLevel = "1"
+        RequireLevel = "1",
     }, 
     WheelChair = 
     {
@@ -42,7 +41,7 @@ local ChairsLibrary =
         SpeedAttack = "1",
         SpawnTime = "20",
         Cost = "5",
-        RequireLevel = "3"
+        RequireLevel = "3",
     },
     ParkBench = 
     {
@@ -56,7 +55,7 @@ local ChairsLibrary =
         SpeedAttack = "1",
         SpawnTime = "45",
         Cost = "5",
-        RequireLevel = "5"
+        RequireLevel = "5",
     },
     StadiumChair =
     {
@@ -70,7 +69,7 @@ local ChairsLibrary =
         SpeedAttack = "1",
         SpawnTime = "20",
         Cost = "2",
-        RequireLevel = "2"
+        RequireLevel = "2",
     },
     BeachChair =
     {
@@ -83,9 +82,24 @@ local ChairsLibrary =
         ImageId = "0",
         SpeedAttack = "1",
         SpawnTime = "20",
-        Cost = "2",
-        RequireLevel = "2"
+        Cost = "100",
+        RequireLevel = "100",
     },
+    GrandStand =
+    {
+        Name = "Grand Stand",
+        Damage = " 30",
+        Health = " 100",
+        Speed = "20",
+        Multiply = "1",
+        ID = "0",
+        ImageId = "0",
+        SpeedAttack = "1",
+        SpawnTime = "20",
+        Cost = "100",
+        RequireLevel = "100",
+    },
+
     Toilet =
     {
         Name = "Toilet",
@@ -98,7 +112,7 @@ local ChairsLibrary =
         SpeedAttack = "1",
         SpawnTime = "100",
         Cost = "2",
-        RequireLevel = "2"
+        RequireLevel = "2",
     },
     Coach =
     {
@@ -112,7 +126,7 @@ local ChairsLibrary =
         SpeedAttack = ".5",
         SpawnTime = "100",
         Cost = "2",
-        RequireLevel = "2"
+        RequireLevel = "2",
     },
     RestaurantSeat =
     {
@@ -126,16 +140,53 @@ local ChairsLibrary =
         SpeedAttack = ".5",
         SpawnTime = "100",
         Cost = "2",
-        RequireLevel = "2"
-    }
+        RequireLevel = "2",
+    },
+    LifesaverChair =
+    {
+        Name = "Lifesaver Chair",
+        Damage = "200",
+        Health = " 200",
+        Speed = "8",
+        Multiply = "1",
+        ID = "0",
+        ImageId = "0",
+        SpeedAttack = "3",
+        SpawnTime = "100",
+        Cost = "10",
+        RequireLevel = "100",
+    },
+    GoldenChair =
+    {
+        Name = "New Golden Chair",
+        Damage = "200",
+        Health = " 200",
+        Speed = "8",
+        Multiply = "1",
+        ID = "0",
+        ImageId = "0",
+        SpeedAttack = "3",
+        SpawnTime = "100",
+        Cost = "0",
+        IDStore = 1814293092,
+        RequireLevel = "1000",
+    },
+    RockingChair =
+    {
+        Name = "Rocking Chair",
+        Damage = "200",
+        Health = " 200",
+        Speed = "8",
+        Multiply = "1",
+        ID = "0",
+        ImageId = "0",
+        SpeedAttack = "3",
+        SpawnTime = "100",
+        Cost = "15",
+        RequireLevel = "10",
+    },
 
-
-
-
-
-
-
-
+    
 
 
 

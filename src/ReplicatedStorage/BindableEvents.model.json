@@ -4,6 +4,10 @@
     {
       "Name": "ExampleBinable",
       "ClassName": "BindableEvent"
+    },
+    {
+      "Name": "ChairBE",
+      "ClassName": "BindableEvent"
     }
    
   ]

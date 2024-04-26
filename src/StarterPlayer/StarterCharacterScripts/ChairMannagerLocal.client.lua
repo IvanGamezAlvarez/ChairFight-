@@ -3,11 +3,11 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local CollectionService = game:GetService("CollectionService")
 
-
-
-
 local RemoteEvents = ReplicatedStorage:FindFirstChild("RemoteEvents") or ReplicatedStorage:WaitForChild("RemoteEvents")
 local ChairEvent = RemoteEvents:WaitForChild("ChairEvent")
+local BindableEvents = ReplicatedStorage:FindFirstChild("BindableEvents") or ReplicatedStorage:WaitForChild("BindableEvents")
+local ChairBindable = BindableEvents:WaitForChild("ChairBE")
+
 
 -- Modules
 local Modules = ReplicatedStorage:WaitForChild("Modules")
@@ -29,12 +29,7 @@ local CanHit = true
 local CanMakeDamage = false
 local hitTruck
 
-
-
-
-
 -- Función para reproducir la animación
-
 local function loadAnimation(animationId)
 
         local anim = Instance.new('Animation', Character)
@@ -42,7 +37,6 @@ local function loadAnimation(animationId)
         game:GetService('RunService').Stepped:Wait()
         local hitTrack = Humanoid:LoadAnimation(anim)
         return hitTrack
-
 end
 
 hitTruck = loadAnimation(16813079831)
@@ -63,17 +57,11 @@ local function SetStats(Chair)
 end
 
 
-
-
-
-
-
 -- Conecta las funciones a los eventos del mouse
 local function ActiveChair()
-    if Tool then 
-    Tool.Activated:Connect(function(mouse)
-        
-    end)
+        if Tool then 
+            Tool.Activated:Connect(function(mouse) 
+        end)
     end
 end
 
@@ -84,11 +72,10 @@ local function MakeConnection()
                 if CanMakeDamage then
                     local ExternalHumanoid = player.Character:WaitForChild("Humanoid")
                     local tag = "MakeDamage"
-                    ChairEvent:FireServer(tag, ExternalHumanoid, Damage, KillsMultiple)
+                    ChairEvent:FireServer(tag, ExternalHumanoid, Damage, KillsMultiple, player)
                     CanMakeDamage = false
                 end
             else
-                
                 if part.Parent.Name == "Skeleton" then
                     if CanMakeDamage then
                         print("we found the alien mf")
@@ -105,11 +92,9 @@ local function MakeConnection()
     Tool.Equipped:Connect(function(Mouse)
         ActiveChair()
         SetStats(Tool)
-        --local Class = ChairsGenerator.new(Tool)
-        --Class:SetBillboardGui()
-
         Mouse.Button1Down:Connect(function()
             if CanHit then
+                ChairBindable:Fire("ShakeDo")
                 hitTruck:Play()
                 hitTruck:AdjustSpeed(SpeedAttack)
                 CanMakeDamage = true
@@ -117,9 +102,6 @@ local function MakeConnection()
             end
             
         end)
-    --  Mouse.Button1Up:Connect(function()
-    --       playAnimation(16813079831)
-    --  end)
         Mouse.Button2Down:Connect(function()
         --    playAnimation(holdAnimation)
         end)
@@ -129,14 +111,7 @@ end
 
 
 
-
-Players.PlayerAdded:Connect(function(player)
-	print(player.Name .. " joined the game!")
-end)
-
-
 LocalPlayer.Character.ChildAdded:Connect(function(tool)
-        print("Is a chair")
         if tool:IsA("Tool") then
             Tool = tool
             print("Is a chair")
@@ -153,3 +128,4 @@ hitTruck.Ended:Connect(function()
     CanHit = true
     CanMakeDamage = false
 end)
+

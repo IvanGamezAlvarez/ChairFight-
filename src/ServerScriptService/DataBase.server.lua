@@ -5,7 +5,7 @@ local LevelData = DataStoreService:GetDataStore("LevelData")
 local ExpieriencesData = DataStoreService:GetDataStore("ExpieriencesData")
 
 local PlayerDataStoreDonations = DataStoreService:GetDataStore("PlayerDataStoreDonations")
-local ChairsData = DataStoreService:GetDataStore("Chairs")
+local ChairsData = DataStoreService:GetDataStore("ChairsDataNew")
 
 local RemoteEvents = ReplicatedStorage:FindFirstChild("RemoteEvents") or ReplicatedStorage:WaitForChild("RemoteEvents")
 local ChairEvent = RemoteEvents:WaitForChild("ChairEvent")
@@ -81,6 +81,9 @@ ChairEvent.OnServerEvent:Connect(function(player, tag, Value1)
 				ChairsOfPlayer = {}
 			end
 			print(ChairsOfPlayer)
+			for _,v in pairs() do
+				
+			end
 			table.insert(ChairsOfPlayer, Value1)
 			ChairsData:SetAsync(PlayerUserId, ChairsOfPlayer)
 			print("Data guardada creo")

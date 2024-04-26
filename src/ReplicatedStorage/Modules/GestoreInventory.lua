@@ -5,6 +5,7 @@ local ChairsLibrary = require(Modules.ChairsLibrary)
 local FolderOfResources =   ReplicatedStorage:WaitForChild("ResourceForModules")
 local ChairsGenerator = require(Modules.ChairsGenerator)
 local ViewportMaker = require(Modules.ViewportMaker)
+local MarketplaceService = game:GetService("MarketplaceService")
 
 
 
@@ -31,7 +32,6 @@ end
 
 function GestoreInventory:SpawnTool(ChairName)
     self.ChairsTool = FolderOfResources:WaitForChild(ChairName):Clone()
-    self.ChairsTool.Parent = self.Player.Backpack
     self.ChairsTool.Parent = self.Player.Character
     return self
 end
@@ -53,36 +53,66 @@ function GestoreInventory:UnlockButton()
 end
 
 function GestoreInventory:LockButton(Button, value)
-    print("locking")
-    local lockImage = Instance.new("ImageButton")
-    lockImage.Image = "rbxassetid://17003544986"
-    lockImage.ImageTransparency = .5
-    lockImage.BackgroundColor3 = Color3.new(0, 0, 0)
-    lockImage.BackgroundTransparency = .5
-    lockImage.Parent = Button
-    lockImage.Size = UDim2.new(1,0,1,0)
-    lockImage.Name = "LockButton"
-    local BuyText = Instance.new("TextLabel")
-    BuyText.AnchorPoint = Vector2.new(.5,.5)
-    BuyText.Position =  UDim2.new(.5,0,.8,0)
-    BuyText.BackgroundColor3 = Color3.new(1, 1, 1)
-    BuyText.BackgroundTransparency = 1
-    BuyText.Parent = lockImage
-    BuyText.Size = UDim2.new(.9,0,.5,0)
-    BuyText.TextScaled = true
-    BuyText.Name = "BuyText"
-    BuyText.Font = "FredokaOne"
-    BuyText.Text = value["Cost"] .. " Kills"
-    BuyText.TextColor3 = Color3.new(1, 1, 1)
-
-    lockImage.Activated:Connect(function()
-        self.LastChairName = value["Name"]
-        self.LastPrice = value["Cost"]
-        self.EquipButton.Text = "Unlock"
-        self.LastChairToUnlock = lockImage
-        self.CanEquip = false
-    end)
-
+    
+    local verification = value["Cost"]
+    print(verification)
+    if  value["Cost"] == "0" then
+        print("A chair cost 0")
+        local lockImage = Instance.new("ImageButton")
+        lockImage.Image = "rbxassetid://17269404582"
+        lockImage.ImageTransparency = .5
+        lockImage.BackgroundColor3 = Color3.new(0, 0, 0)
+        lockImage.BackgroundTransparency = .5
+        lockImage.Parent = Button
+        lockImage.Size = UDim2.new(1,0,1,0)
+        lockImage.Name = "LockButton"
+        lockImage.Activated:Connect(function()
+            MarketplaceService:PromptProductPurchase(self.Player, value["IDStore"])
+            if self.LastUiStroke then
+                self.LastUiStroke.Thickness = 0
+            end
+        end)
+    else
+        local lockImage = Instance.new("ImageButton")
+        lockImage.Image = "rbxassetid://17003544986"
+        lockImage.ImageTransparency = .5
+        lockImage.BackgroundColor3 = Color3.new(0, 0, 0)
+        lockImage.BackgroundTransparency = .5
+        lockImage.Parent = Button
+        lockImage.Size = UDim2.new(1,0,1,0)
+        lockImage.Name = "LockButton"
+        local BuyText = Instance.new("TextLabel")
+        BuyText.AnchorPoint = Vector2.new(.5,.5)
+        BuyText.Position =  UDim2.new(.5,0,.8,0)
+        BuyText.BackgroundColor3 = Color3.new(1, 1, 1)
+        BuyText.BackgroundTransparency = 1
+        BuyText.Parent = lockImage
+        BuyText.Size = UDim2.new(.9,0,.5,0)
+        BuyText.TextScaled = true
+        BuyText.Name = "BuyText"
+        BuyText.Font = "FredokaOne"
+        BuyText.Text = value["Cost"] .. " Kills"
+        BuyText.TextColor3 = Color3.new(1, 1, 1)
+        lockImage.Activated:Connect(function()
+            if self.LastUiStroke then
+                self.LastUiStroke.Thickness = 0
+            end
+            self.LastChairName = value["Name"]
+            self.LastPrice = value["Cost"]
+            self.EquipButton.Text = "Unlock"
+            self.LastChairToUnlock = lockImage
+            self.CanEquip = false
+        end)
+    end
+    return self
+end
+function GestoreInventory:UpdateSpecWindow(value)
+    self.ViewportClassSpecImage:UpdateModel(value["Name"])
+    self.SpecName.Text = value["Name"]
+    self.SpecDamage.Text = "Damage:  " .. value["Damage"]
+    self.SpecSpeed.Text = "Speed:  " .. value["Speed"]
+    self.SpecHealth.Text = "Health:  " .. value["Health"]
+    self.SpecMultiply.Text =  "Multiply:  " .. value["Multiply"]
     return self
 end
 
@@ -95,35 +125,17 @@ function GestoreInventory:SpawnChairsButtons()
             if self.LastUiStroke then
                 self.LastUiStroke.Thickness = 0
             end
-                        self.LastUiStroke = Button.UIStroke
+            self.LastUiStroke = Button.UIStroke
             Button.UIStroke.Thickness = 3
             self.EquipButton.Text = "Equip"
             self.CanEquip = true
-            self.ViewportClassSpecImage:UpdateModel(value["Name"])
-            self.SpecName.Text = value["Name"]
-            self.SpecDamage.Text = "Damage:  " .. value["Damage"]
-            self.SpecSpeed.Text = "Speed:  " .. value["Speed"]
-            self.SpecHealth.Text = "Health:  " .. value["Health"]
-            self.SpecMultiply.Text =  "Multuply:  " .. value["Multiply"]
+            self:UpdateSpecWindow(value)
+            
         end)
+        
     end
     return self
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

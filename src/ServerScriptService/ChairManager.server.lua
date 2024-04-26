@@ -30,9 +30,10 @@ end
 
 -- Conecta las funciones a los eventos del mouse
 
-local function AddExpirience(player)
+local function AddExpirience(player, multiply)
     local StatsData = player:WaitForChild("StatsData")
     local Experience = StatsData:WaitForChild("Experience")
+    player.leaderstats.Kills.Value += 1 * multiply
     Experience.Value += 1 
     ChairEvent:FireClient(player,"AddExpirience", Experience.Value )
 
@@ -67,11 +68,17 @@ end
 ChairEvent.OnServerEvent:Connect(function(player, tag, Value1, Value2, Value3)
     if tag == "MakeDamage" then
         Value1.Health = Value1.Health - Value2
+        print(Value1.Parent)
+        local PlayerHitted
+        local Succes, Message = pcall(function()
+            PlayerHitted = Players.GetPlayerFromCharacter(Value1.Parent)
+        end)
+        if Succes then
+            ChairEvent:FireClient(PlayerHitted, "ShakeRecive")
+        end
         if Value1.Health <= 0 then
             print(Value1.Parent.Name .. "Was Killed by" ..player.Name)
-            --local KillsData = leaderstats:WaitForChild("Kills")
-            --KillsData.Value += 1 * Value3
-            AddExpirience(player)
+            AddExpirience(player, Value3)
         end 
     elseif tag == "EquipChair" then
         print("EquipChair")

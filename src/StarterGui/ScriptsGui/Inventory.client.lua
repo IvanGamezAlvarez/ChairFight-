@@ -16,6 +16,9 @@ local CloseButton = InventoryFrame:WaitForChild("CloseButton")
 local EquipButton = InventoryFrame:WaitForChild("EquipButton")
 local RemoteEvents = ReplicatedStorage:FindFirstChild("RemoteEvents") or ReplicatedStorage:WaitForChild("RemoteEvents")
 local ChairEvent = RemoteEvents:WaitForChild("ChairEvent")
+local BindableEvents = ReplicatedStorage:FindFirstChild("BindableEvents") or ReplicatedStorage:WaitForChild("BindableEvents")
+local ChairBindable = BindableEvents:WaitForChild("ChairBE")
+
 
 local leaderstats = LocalPlayer:WaitForChild("leaderstats")
 local KillsData = leaderstats:WaitForChild("Kills")
@@ -31,7 +34,10 @@ InventoryClass:SpawnChairsButtons()
 
 
 EquipButton.Activated:Connect(function()
+    print("Equip Button")
+
     if InventoryClass.CanEquip then
+        print("Equip Button")
         ChairEvent:FireServer("EquipChair", InventoryClass.SpecName.Text)
         --ChairsGenerator.DestroyChairs(LocalPlayer)
         --InventoryClass:SpawnTool()
@@ -44,6 +50,9 @@ EquipButton.Activated:Connect(function()
             KillsData.Value -= tonumber(InventoryClass.LastPrice)
             local tag = "UnlockChair"
             ChairEvent:FireServer(tag, InventoryClass.LastChairName )
+        else
+            ChairBindable:Fire("NotLevel")
+            print("not level")
         end
        
         
@@ -59,8 +68,12 @@ end)
 
 ChairEvent.OnClientEvent:Connect(function(Tag, Value1)
     if Tag == "UnlockIndividualChair" then
-        print("enter")
+        
         local Scroll = InventoryScroll:FindFirstChild(Value1)
+        if Scroll == nil then
+            warn("The chair is out")
+            return
+        end
         local Button = Scroll:FindFirstChild("ImageButton")
         print(Button)
         Button:WaitForChild("LockButton"):Destroy()

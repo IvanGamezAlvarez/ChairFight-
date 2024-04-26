@@ -52,7 +52,7 @@ function ChairsModule.new(Chair)
 end
 
 function ChairsModule:SetBillboardGui()
-    print("Setting Billboard")
+    print(self.Chair)
     print(self.Name)
     self.Frame = self.BillboardGui.Frame
     self.CoinsMultiplierTxt = self.Frame.CoinsMultiplier

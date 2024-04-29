@@ -185,6 +185,20 @@ local ChairsLibrary =
         Cost = "15",
         RequireLevel = "10",
     },
+    CarSeat =
+    {
+        Name = "Car Seat",
+        Damage = "200",
+        Health = " 200",
+        Speed = "8",
+        Multiply = "1",
+        ID = "0",
+        ImageId = "0",
+        SpeedAttack = "3",
+        SpawnTime = "100",
+        Cost = "15",
+        RequireLevel = "10",
+    },
 
     
 

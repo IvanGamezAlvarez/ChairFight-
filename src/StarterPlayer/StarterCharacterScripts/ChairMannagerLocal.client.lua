@@ -46,11 +46,28 @@ local function SetStats(Chair)
     for index, value in pairs(ChairsLibrary) do 
         if Chair.Name == value["Name"] then
             print("Encontramos la silla indicada es "..value["Name"] )
-            Humanoid.MaxHealth = value["Health"]
-	        Humanoid.Health = value["Health"]
-            Humanoid.WalkSpeed = value["Speed"]
-            SpeedAttack = value["SpeedAttack"]
-            Damage = value["Damage"]
+            Humanoid.Health = value["Health"]
+
+            if LocalPlayer.Backpack.X2Health then
+                Humanoid.MaxHealth = value["Health"] * 2
+            else
+                Humanoid.MaxHealth = value["Health"] 
+            end
+            if LocalPlayer.Backpack.X2Speed then
+                Humanoid.WalkSpeed = value["Speed"] * 2
+            else
+                Humanoid.WalkSpeed = value["Speed"] 
+            end
+            if LocalPlayer.Backpack.X2SpeedAttack then
+                SpeedAttack = value["SpeedAttack"] * 2
+            else
+                SpeedAttack = value["SpeedAttack"] 
+            end
+            if LocalPlayer.Backpack.X2Damage then
+                Damage = value["Damage"] * 2
+            else
+                Damage = value["Damage"]
+            end
             KillsMultiple = value["Multiply"]
         end
     end

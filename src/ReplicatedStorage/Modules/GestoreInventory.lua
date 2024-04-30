@@ -67,7 +67,7 @@ function GestoreInventory:LockButton(Button, value)
         lockImage.Size = UDim2.new(1,0,1,0)
         lockImage.Name = "LockButton"
         lockImage.Activated:Connect(function()
-            MarketplaceService:PromptProductPurchase(self.Player, value["IDStore"])
+            MarketplaceService:PromptGamePassPurchase(self.Player, value["IDStore"])
             if self.LastUiStroke then
                 self.LastUiStroke.Thickness = 0
             end

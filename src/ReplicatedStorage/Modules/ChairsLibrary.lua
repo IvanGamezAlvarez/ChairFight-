@@ -3,7 +3,7 @@ local ChairsLibrary =
     ClassicChair = 
     {
         Name = "Classic Chair",
-        Damage = " 50",
+        Damage = " 20",
         Health = " 100",
         Speed = "18",
         Multiply = "1",
@@ -168,7 +168,7 @@ local ChairsLibrary =
         SpeedAttack = "3",
         SpawnTime = "100",
         Cost = "0",
-        IDStore = 1814293092,
+        IDStore = 796599875,
         RequireLevel = "1000",
     },
     RockingChair =
@@ -199,7 +199,34 @@ local ChairsLibrary =
         Cost = "15",
         RequireLevel = "10",
     },
-
+    Wheel =
+    {
+        Name = "Wheel",
+        Damage = "200",
+        Health = " 200",
+        Speed = "8",
+        Multiply = "1",
+        ID = "0",
+        ImageId = "0",
+        SpeedAttack = "3",
+        SpawnTime = "100",
+        Cost = "15",
+        RequireLevel = "10",
+    },
+    Boxbench = 
+    {
+        Name = "Box bench",
+        Damage = "200",
+        Health = " 200",
+        Speed = "8",
+        Multiply = "1",
+        ID = "0",
+        ImageId = "0",
+        SpeedAttack = "3",
+        SpawnTime = "100",
+        Cost = "15",
+        RequireLevel = "10",
+    }
     
 
 

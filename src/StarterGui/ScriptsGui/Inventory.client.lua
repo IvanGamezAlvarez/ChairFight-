@@ -29,7 +29,11 @@ local InventoryClass = GestoreInventory.new(InventoryFrame, LocalPlayer)
 InventoryClass:SpawnChairsButtons()
 
 
+local function UnlockChairs()
 
+
+
+end
 
 
 

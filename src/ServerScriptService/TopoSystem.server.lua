@@ -10,9 +10,10 @@ local objectToClone = TopoFolder:WaitForChild("Skeleton") -- Asegúrate de reemp
 local maxObjects = 3 -- Máximo número de objetos que pueden aparecer al mismo tiempo
 local speed = 5 -- Velocidad de movimiento en segundos
 
-while true do
 
-    local randomHole = holes:GetChildren()[math.random(1, #holes:GetChildren())]
+
+local function SpawnEnemy(randomHole)
+
     
     -- Verificar cuántos objetos hay en ese Hole
  
@@ -30,11 +31,21 @@ while true do
         -- Hacer aparecer el objeto
 
         --tween:Play()
-    wait(4)
+    return newObject
         
         --tween:Reverse()
-        
-    newObject:Destroy()
-  
+    
+
+
+end
+while true do
+    local randomHole = holes:GetChildren()[math.random(1, #holes:GetChildren())]
+    local enemy =SpawnEnemy(randomHole)
+    local SecondRandomHole  = holes:GetChildren()[math.random(1, #holes:GetChildren())]
+    local SecondEnemy = SpawnEnemy(SecondRandomHole)
+    wait(8)
+    enemy:Destroy()
+    SecondEnemy:Destroy()
     wait(2)
+
 end

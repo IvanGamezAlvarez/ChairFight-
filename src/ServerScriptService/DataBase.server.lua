@@ -48,7 +48,11 @@ game.Players.PlayerAdded:Connect(function(player)
 	Kills.Value = KillsData:GetAsync(PlayerUserId)
 	local Level = Instance.new("IntValue", leaderstats)
 	Level.Name = "Level"
+	Level.Value = 1
 	Level.Value = LevelData:GetAsync(PlayerUserId)
+	if Level.Value == 0 then
+		Level.Value = 1
+	end
 	ChairEvent:FireClient(player,"LevelUp", Level.Value)
 	local Experience = Instance.new("IntValue", statData)
 	Experience.Name = "Experience"
@@ -81,9 +85,9 @@ ChairEvent.OnServerEvent:Connect(function(player, tag, Value1)
 				ChairsOfPlayer = {}
 			end
 			print(ChairsOfPlayer)
-			for _,v in pairs() do
+			--for _,v in pairs() do
 				
-			end
+			--end
 			table.insert(ChairsOfPlayer, Value1)
 			ChairsData:SetAsync(PlayerUserId, ChairsOfPlayer)
 			print("Data guardada creo")

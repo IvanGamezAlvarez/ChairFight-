@@ -2,6 +2,8 @@
 --Services
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local CollectionService = game:GetService("CollectionService")
+local ContextA = game:GetService("ContextActionService")
+
 
 local RemoteEvents = ReplicatedStorage:FindFirstChild("RemoteEvents") or ReplicatedStorage:WaitForChild("RemoteEvents")
 local ChairEvent = RemoteEvents:WaitForChild("ChairEvent")
@@ -39,7 +41,7 @@ local function loadAnimation(animationId)
         return hitTrack
 end
 
-hitTruck = loadAnimation(16813079831)
+hitTruck = loadAnimation(17356095015)
 
 local function SetStats(Chair)
     print("Setting Chair")
@@ -82,6 +84,19 @@ local function ActiveChair()
     end
 end
 
+
+local function Hiting()
+        ActiveChair()
+        SetStats(Tool)
+            if CanHit then
+                ChairBindable:Fire("ShakeDo")
+                hitTruck:Play()
+                hitTruck:AdjustSpeed(SpeedAttack)
+                CanMakeDamage = true
+                CanHit = false
+            end    
+end
+
 local function MakeConnection()
     Tool.Handle.touched:Connect(function(part)
         local player = game:GetService("Players"):GetPlayerFromCharacter(part.Parent)
@@ -106,23 +121,23 @@ local function MakeConnection()
             end
         
     end)
-    Tool.Equipped:Connect(function(Mouse)
-        ActiveChair()
-        SetStats(Tool)
-        Mouse.Button1Down:Connect(function()
-            if CanHit then
-                ChairBindable:Fire("ShakeDo")
-                hitTruck:Play()
-                hitTruck:AdjustSpeed(SpeedAttack)
-                CanMakeDamage = true
-                CanHit = false
-            end
+    -- Tool.Equipped:Connect(function(Mouse)
+    --     ActiveChair()
+    --     SetStats(Tool)
+    --     Mouse.Button1Down:Connect(function()
+    --         if CanHit then
+    --             ChairBindable:Fire("ShakeDo")
+    --             hitTruck:Play()
+    --             hitTruck:AdjustSpeed(SpeedAttack)
+    --             CanMakeDamage = true
+    --             CanHit = false
+    --         end
             
-        end)
-        Mouse.Button2Down:Connect(function()
-        --    playAnimation(holdAnimation)
-        end)
-    end)
+    --     end)
+    --     Mouse.Button2Down:Connect(function()
+    --     --    playAnimation(holdAnimation)
+    --     end)
+    -- end)
     
 end
 
@@ -146,3 +161,7 @@ hitTruck.Ended:Connect(function()
     CanMakeDamage = false
 end)
 
+
+ContextA:BindAction("ChairHit", Hiting, true,  Enum.UserInputType.MouseButton1)
+ContextA:SetPosition("ChairHit",UDim2.new(0.3,0,0.3,0))
+ContextA:SetImage("ChairHit", "rbxassetid://17355786962")
